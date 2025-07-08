@@ -29,9 +29,12 @@ class Region:
             # ou alguma outra estrutura que a ordem dos elementos
             # não importe, pois assim não seria necessário utilizar
             # o sorted(), o que reduziria a complexidade de tempo
+            a_descendents = sorted(region_a.descendents, key=lambda obj: obj.regionName)
+            b_descendents = sorted(region_b.descendents, key=lambda obj: obj.regionName)
+
             for i in range(len(region_a.descendents)):
                 region_to_check.append(
-                    [sorted(region_a.descendents[i], key= lambda x: x.regionName), sorted(region_b.descendents[i],  key= lambda x: x.regionName)]
+                    [a_descendents[i], b_descendents[i]]
                 )
 
         return True
@@ -55,9 +58,9 @@ if __name__ == '__main__':
     br2 = Region('Brazil')
 
     rj2 = Region('RJ')
-    rj2.descendents.append(Region("buzios"))
     rj2.descendents.append(Region("marica"))
     rj2.descendents.append(Region("rio-de-janeiro"))
+    rj2.descendents.append(Region("buzios"))
 
     br2.descendents.append(rj2)
 
